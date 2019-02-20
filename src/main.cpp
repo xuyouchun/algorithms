@@ -3,6 +3,7 @@
 
 #include <avl_tree.h>
 #include <min_heap.h>
+#include <min_max_heap.h>
 
 using namespace algorithms;
 
