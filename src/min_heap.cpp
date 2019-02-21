@@ -37,10 +37,11 @@ namespace algorithms
 
     void min_heap_t::__sit_down(size_t n)
     {
-        size_t left = n * 2, right = left + 1;
+        size_t left = n * 2;
         if(left > __current_index)
             return;
 
+        size_t right = left + 1;
         size_t sub = (right <= __current_index && __heap[right] < __heap[left])? right : left;
         if(__heap[n] > __heap[sub])
         {

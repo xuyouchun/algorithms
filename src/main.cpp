@@ -9,7 +9,7 @@ using namespace algorithms;
 
 int main(int argc, char ** argv)
 {
-    min_heap_test();
+    min_max_heap_test();
 
     return 0;
 }
