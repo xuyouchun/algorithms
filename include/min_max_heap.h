@@ -43,8 +43,8 @@ namespace algorithms
         void __walk_min_layer(__element_t element, size_t k);
         void __walk_max_layer(__element_t element, size_t k);
 
-        void __sit_down_min_layer(size_t k);
-        void __sit_down_max_layer(size_t k);
+        size_t __min_child(size_t k);
+        size_t __max_child(size_t k);
     };
 
     ////////// ////////// ////////// ////////// //////////
