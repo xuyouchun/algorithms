@@ -3,6 +3,7 @@
 #define _COMMON_H_
 
 #include <string>
+#include <vector>
 #include <iostream>
 #include <cmath>
 #include <algorithm>
@@ -51,6 +52,16 @@ namespace algorithms
         return n;
     }
 
+    template<typename t> double log2(t value)
+    {
+        return std::log(value) / std::log(2);
+    }
+
+    inline size_t pow2(size_t value)
+    {
+        return (size_t)std::pow(2, value);
+    }
+
     /*
                    A                    # 15
            A               A            # 7 15
@@ -89,6 +100,68 @@ namespace algorithms
 
             std::cout << std::endl;
         }
+    }
+
+    namespace
+    {
+        template<typename _node_t>
+        struct __element_t { _node_t * node; size_t index; };
+    }
+
+    template<typename _node_t> void print_tree(_node_t * node)
+    {
+        if(node == nullptr)
+            return;
+
+        typedef __element_t<_node_t> element_t;
+        std::vector<element_t> elements;
+        elements.push_back(element_t { node, 1 });
+
+        for(size_t k = 0; k < elements.size(); k++)
+        {
+            element_t e = elements[k];
+            if(e.node->left != nullptr)
+                elements.push_back(element_t { e.node->left, e.index * 2 });
+
+            if(e.node->right != nullptr)
+                elements.push_back(element_t { e.node->right, e.index * 2 + 1 });
+        }
+
+        size_t n = elements[elements.size() - 1].index;
+        int height = (int)std::log2(n) + 1;
+        size_t index = 0;
+        element_t e = elements[index++];
+
+        for(int h = 1, count = 1; h <= height; h++, count *= 2)
+        {
+            size_t offset = __tree_node_offset(height - h);
+            size_t space = __tree_node_offset(height - h + 1);
+
+            __print_spaces(offset);
+
+            size_t start = (size_t)std::pow(2, h - 1), end = (size_t)std::pow(2, h) - 1;
+            for(size_t k = start; k <= end; k++)
+            {
+                if(k != start)
+                    __print_spaces(space);
+
+                if(e.index != k)
+                {
+                    std::cout << ' ';
+                }
+                else
+                {
+                    std::cout << *e.node;
+                    if(index >= elements.size())
+                        break;
+
+                    e = elements[index++];
+                }
+            }
+
+            std::cout << std::endl;
+        }
+_end:;
     }
 
     ////////// ////////// ////////// ////////// //////////

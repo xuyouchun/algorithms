@@ -22,7 +22,7 @@ namespace algorithms
         __element_t pop_min();
         __element_t pop_max();
 
-        bool   empty() const { return __current_index == 0; }
+        bool   empty() const { return size() == 0; }
         size_t size()  const { return __current_index; }
 
         void print();
